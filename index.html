@@ -4,292 +4,448 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JBE Elevator — Configurator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg:      #f7f5f2;
-      --surface: #ffffff;
-      --border:  #e2ddd8;
-      --accent:  #2c4a3e;
-      --accent2: #8b6f47;
-      --text:    #1a1a18;
-      --muted:   #8a8680;
+      --red:     #e2000f;
+      --dark:    #1a1a1a;
+      --mid:     #444444;
+      --muted:   #888888;
+      --border:  #e0e0e0;
+      --bg:      #f4f4f4;
+      --white:   #ffffff;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 300;
+      background: var(--white);
+      color: var(--dark);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
       min-height: 100vh;
     }
 
-    /* Header */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247,245,242,0.93);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 56px;
-      height: 68px;
+    /* ── Top bar ── */
+    .topbar {
+      background: var(--dark);
+      padding: 0 48px;
+      height: 36px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      animation: fadeDown 0.5s ease both;
+      justify-content: flex-end;
+      gap: 24px;
     }
-
-    .logo { display: flex; align-items: baseline; gap: 10px; }
-
-    .logo-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.02em;
-    }
-
-    .logo-tag {
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
+    .topbar a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .header-link {
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
+      color: #aaa;
       text-decoration: none;
       transition: color 0.2s;
     }
-    .header-link:hover { color: var(--accent); }
+    .topbar a:hover { color: var(--white); }
 
-    /* Hero */
-    .hero {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 80px 56px 56px;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 64px;
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--white);
+      border-bottom: 3px solid var(--red);
+      padding: 0 48px;
+      height: 72px;
+      display: flex;
       align-items: center;
-      animation: fadeUp 0.7s 0.1s ease both;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      animation: fadeDown 0.4s ease both;
     }
 
-    .eyebrow {
-      display: inline-flex;
+    .logo {
+      display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
+      gap: 16px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--accent2);
+    }
+
+    .logo-sub {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header-nav a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .header-nav a:hover { color: var(--red); border-bottom-color: var(--red); }
+
+    .btn-contact {
+      background: var(--red);
+      color: var(--white) !important;
+      border: none !important;
+      padding: 10px 22px;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s !important;
+    }
+    .btn-contact:hover { background: #b8000c !important; color: var(--white) !important; }
+
+    /* ── Hero banner ── */
+    .hero {
+      background: var(--dark);
+      color: var(--white);
+      padding: 72px 48px 64px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--red);
+    }
+
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
       margin-bottom: 20px;
     }
-    .eyebrow::before {
-      content: '';
-      width: 28px;
-      height: 1px;
-      background: var(--accent2);
-    }
 
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
-      font-weight: 400;
-      line-height: 1.08;
-      letter-spacing: -0.01em;
-      margin-bottom: 24px;
-    }
-    h1 em { font-style: italic; color: var(--accent); }
+    .hero h1 span { color: var(--red); }
 
     .hero-desc {
       font-size: 1rem;
-      line-height: 1.75;
-      color: var(--muted);
-      max-width: 480px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #ccc;
+      max-width: 560px;
     }
 
     .hero-stats {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 0;
+      border-left: 1px solid #333;
       padding-left: 48px;
-      border-left: 1px solid var(--border);
     }
 
-    .stat { display: flex; flex-direction: column; gap: 4px; }
+    .stat {
+      padding: 16px 0;
+      border-bottom: 1px solid #333;
+    }
+    .stat:last-child { border-bottom: none; }
 
     .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem;
-      font-weight: 600;
-      color: var(--accent);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
       line-height: 1;
+      margin-bottom: 4px;
     }
+
+    .stat-num span { color: var(--red); }
 
     .stat-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .stat-divider { width: 32px; height: 1px; background: var(--border); }
-
-    /* Configurator */
-    .config-section {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 56px 96px;
-      animation: fadeUp 0.7s 0.25s ease both;
-    }
-
-    .config-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .config-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .config-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #888;
+    }
+
+    /* ── Section intro ── */
+    .section-intro {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 48px 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 28px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+    }
+
+    .section-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--muted);
+      background: var(--bg);
+      padding: 8px 16px;
+      border: 1px solid var(--border);
     }
 
-    .status-dot {
-      width: 6px;
-      height: 6px;
+    .live-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #4caf7d;
+      background: #22c55e;
       animation: pulse 2s infinite;
+      flex-shrink: 0;
     }
 
-    /* THE configurator div — single, empty, correct id */
+    /* ── Configurator ── */
+    .config-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 48px 80px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    /* THE div — single, empty, correct id */
     #eao_integration {
       width: 100%;
       height: 850px !important;
       overflow: hidden;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: var(--white);
     }
 
-    /* Footer */
+    /* ── Footer ── */
     footer {
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-      padding: 28px 56px;
+      background: var(--dark);
+      color: #888;
+      padding: 32px 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.75rem;
-      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      border-top: 3px solid var(--red);
     }
-    footer a { color: var(--accent); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
 
-    /* Animations */
+    footer a { color: #ccc; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--white); }
+
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Animations ── */
     @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-12px); }
+      from { opacity: 0; transform: translateY(-10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
-      50%       { opacity: 0.4; }
+      50%       { opacity: 0.3; }
     }
 
-    /* Mobile */
+    /* ── Mobile ── */
     @media (max-width: 900px) {
-      header { padding: 0 24px; }
-      .hero  { grid-template-columns: 1fr; padding: 56px 24px 40px; gap: 40px; }
-      .hero-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 32px; flex-direction: row; flex-wrap: wrap; }
-      .stat-divider { display: none; }
-      .config-section { padding: 0 24px 64px; }
+      .topbar { display: none; }
+      header { padding: 0 20px; height: 60px; }
+      .hero { padding: 48px 20px 40px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero-stats { border-left: none; padding-left: 0; border-top: 1px solid #333; padding-top: 24px; flex-direction: row; flex-wrap: wrap; gap: 0; }
+      .stat { padding: 12px 24px 12px 0; border-bottom: none; }
+      .section-intro { padding: 32px 20px 16px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .config-wrap { padding: 16px 20px 48px; }
       #eao_integration { height: 600px !important; }
-      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+      footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Top utility bar -->
+  <div class="topbar">
+    <a href="https://www.digipara.com" target="_blank">Powered by DigiPara</a>
+    <a href="mailto:info@jbe-elevator.com">Contact</a>
+  </div>
+
+  <!-- Main header -->
   <header>
-    <div class="logo">
-      <span class="logo-name">JBE Elevator</span>
-      <span class="logo-tag">Configurator</span>
-    </div>
-    <a href="https://www.digipara.com" target="_blank" class="header-link">Powered by DigiPara</a>
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <!-- Simple lift icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="2" width="18" height="20" rx="1" fill="none" stroke="white" stroke-width="2"/>
+          <line x1="12" y1="2" x2="12" y2="22" stroke="white" stroke-width="1.5"/>
+          <polyline points="7,8 9,6 11,8" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <polyline points="13,16 15,18 17,16" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">JBE Elevator</span>
+        <span class="logo-sub">Lift Solutions</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="#">Products</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="mailto:info@jbe-elevator.com" class="btn-contact">Contact us</a>
+    </nav>
   </header>
 
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-left">
-      <div class="eyebrow">Interactive Demo</div>
-      <h1>Design your <em>perfect</em><br>elevator solution</h1>
-      <p class="hero-desc">
-        Explore and configure elevator specifications, dimensions, and finishes in real time.
-        Built on DigiPara Elevatorarchitect Online — the industry standard for elevator planning.
-      </p>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">360°</span>
-        <span class="stat-label">Visual Preview</span>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-tag">Interactive Demo</div>
+        <h1>Configure your<br><span>ideal elevator</span><br>solution</h1>
+        <p class="hero-desc">
+          Explore and configure elevator specifications, dimensions, and finishes in real time.
+          Built on DigiPara Elevatorarchitect Online — the industry standard for elevator planning.
+        </p>
       </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">Real‑time</span>
-        <span class="stat-label">Configuration</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">Export</span>
-        <span class="stat-label">Ready Specifications</span>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">360<span>°</span></div>
+          <div class="stat-label">Visual Preview</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Real<span>‑time</span></div>
+          <div class="stat-label">Configuration</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Export<span>‑ready</span></div>
+          <div class="stat-label">Specifications</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="config-section">
-    <div class="config-header">
-      <span class="config-title">Live Configurator</span>
-      <div class="config-meta">
-        <span class="status-dot"></span>
-        <span>Live — Instance a25QF000008XH3tYAG</span>
-      </div>
+  <!-- Configurator section header -->
+  <div class="section-intro">
+    <div class="section-label">
+      <span class="section-title">Live Configurator</span>
     </div>
+    <div class="section-badge">
+      <span class="live-dot"></span>
+      <span>Live — Instance a25QF000008XH3tYAG</span>
+    </div>
+  </div>
 
-    <!-- ⚠️ This div must stay exactly like this: single, empty, id="eao_integration" -->
+  <!-- Configurator -->
+  <div class="config-wrap">
+    <!-- ⚠️ Single, empty div — do not add children -->
     <div id="eao_integration"></div>
+  </div>
 
-  </section>
-
+  <!-- Footer -->
   <footer>
+    <span class="footer-logo">JBE Elevator</span>
     <span>© 2026 JBE Elevator Ltd. All rights reserved.</span>
     <span>Powered by <a href="https://www.digipara.com" target="_blank">DigiPara Elevatorarchitect Online</a></span>
   </footer>
