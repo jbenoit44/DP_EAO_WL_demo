@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JBE Elevator — Configurator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --red:     #e2000f;
-      --dark:    #1a1a1a;
-      --mid:     #444444;
-      --muted:   #888888;
-      --border:  #e0e0e0;
-      --bg:      #f4f4f4;
+      --navy:    #002429;
+      --cyan:    #00c8f3;
+      --light:   #f1fafb;
       --white:   #ffffff;
+      --text:    #333333;
+      --muted:   #7f7f7f;
+      --border:  #dde8ea;
+      --shadow:  0 4px 20px rgba(0,36,41,0.10);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,269 +22,264 @@
 
     body {
       background: var(--white);
-      color: var(--dark);
-      font-family: 'Barlow', sans-serif;
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
       font-weight: 400;
+      font-size: 15px;
+      line-height: 1.65;
       min-height: 100vh;
     }
 
     /* ── Top bar ── */
     .topbar {
-      background: var(--dark);
-      padding: 0 48px;
-      height: 36px;
+      background: #001a1e;
+      padding: 0 40px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 24px;
+      gap: 28px;
     }
     .topbar a {
       font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #aaa;
+      color: #7fbfc8;
       text-decoration: none;
       transition: color 0.2s;
     }
-    .topbar a:hover { color: var(--white); }
+    .topbar a:hover { color: var(--cyan); }
 
     /* ── Header ── */
     header {
       position: sticky;
       top: 0;
       z-index: 200;
-      background: var(--white);
-      border-bottom: 3px solid var(--red);
-      padding: 0 48px;
-      height: 72px;
+      background: var(--navy);
+      padding: 0 40px;
+      height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      animation: fadeDown 0.4s ease both;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       text-decoration: none;
     }
 
     .logo-mark {
-      width: 40px;
-      height: 40px;
-      background: var(--red);
+      width: 42px;
+      height: 42px;
+      background: var(--cyan);
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 4px;
       flex-shrink: 0;
     }
-
     .logo-mark svg {
-      width: 22px;
-      height: 22px;
-      fill: white;
+      width: 24px;
+      height: 24px;
     }
 
     .logo-text {
       display: flex;
       flex-direction: column;
-      line-height: 1.1;
+      line-height: 1.15;
     }
-
     .logo-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: var(--dark);
-      letter-spacing: 0.04em;
+      color: var(--white);
+      letter-spacing: 0.03em;
       text-transform: uppercase;
     }
-
     .logo-sub {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 400;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--cyan);
     }
 
     .header-nav {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
     }
-
     .header-nav a {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: rgba(255,255,255,0.75);
       text-decoration: none;
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.2s;
     }
-    .header-nav a:hover { color: var(--red); border-bottom-color: var(--red); }
+    .header-nav a:hover { color: var(--cyan); }
 
     .btn-contact {
-      background: var(--red);
-      color: var(--white) !important;
-      border: none !important;
-      padding: 10px 22px;
-      font-size: 0.8rem !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.2s !important;
+      background: var(--cyan) !important;
+      color: var(--navy) !important;
+      padding: 9px 22px;
+      border-radius: 4px;
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, opacity 0.2s !important;
     }
-    .btn-contact:hover { background: #b8000c !important; color: var(--white) !important; }
+    .btn-contact:hover { opacity: 0.88; color: var(--navy) !important; }
 
-    /* ── Hero banner ── */
+    /* ── Hero ── */
     .hero {
-      background: var(--dark);
+      background: var(--navy);
       color: var(--white);
-      padding: 72px 48px 64px;
+      padding: 72px 40px 80px;
       position: relative;
       overflow: hidden;
-      animation: fadeUp 0.6s 0.1s ease both;
     }
-
-    .hero::before {
+    .hero::after {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--red);
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--cyan);
     }
 
     .hero-inner {
-      max-width: 1280px;
+      max-width: 1360px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 48px;
+      gap: 60px;
       align-items: center;
     }
 
     .hero-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 16px;
+      color: var(--cyan);
+      margin-bottom: 18px;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--cyan);
     }
 
     .hero h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
       font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: 0.01em;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
       text-transform: uppercase;
       margin-bottom: 20px;
     }
-
-    .hero h1 span { color: var(--red); }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--cyan);
+    }
 
     .hero-desc {
       font-size: 1rem;
       font-weight: 300;
-      line-height: 1.7;
-      color: #ccc;
-      max-width: 560px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
     }
 
-    .hero-stats {
+    /* Stats card */
+    .hero-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(0,200,243,0.2);
+      border-radius: 8px;
+      padding: 32px 36px;
       display: flex;
       flex-direction: column;
       gap: 0;
-      border-left: 1px solid #333;
-      padding-left: 48px;
+      min-width: 220px;
     }
-
     .stat {
       padding: 16px 0;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .stat:last-child { border-bottom: none; }
+    .stat:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat:first-child { padding-top: 0; }
 
     .stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: 700;
       color: var(--white);
       line-height: 1;
       margin-bottom: 4px;
     }
-
-    .stat-num span { color: var(--red); }
-
+    .stat-num span { color: var(--cyan); }
     .stat-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #888;
+      color: rgba(255,255,255,0.45);
     }
 
-    /* ── Section intro ── */
-    .section-intro {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 48px 48px 24px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+    /* ── Section header ── */
+    .section-header {
+      background: var(--light);
       border-bottom: 1px solid var(--border);
-      animation: fadeUp 0.6s 0.2s ease both;
     }
-
-    .section-label {
+    .section-header-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 28px 40px;
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .section-label::before {
-      content: '';
-      display: block;
-      width: 4px;
-      height: 28px;
-      background: var(--red);
-      flex-shrink: 0;
+      justify-content: space-between;
     }
 
     .section-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.6rem;
+      font-size: 0.72rem;
       font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--dark);
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 3px;
+      background: var(--cyan);
     }
 
     .section-badge {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      background: var(--bg);
-      padding: 8px 16px;
+      background: var(--white);
+      padding: 7px 14px;
       border: 1px solid var(--border);
+      border-radius: 4px;
     }
-
     .live-dot {
       width: 7px;
       height: 7px;
@@ -295,40 +291,150 @@
 
     /* ── Configurator ── */
     .config-wrap {
-      max-width: 1280px;
+      max-width: 1360px;
       margin: 0 auto;
-      padding: 24px 48px 80px;
-      animation: fadeUp 0.6s 0.3s ease both;
+      padding: 32px 40px 80px;
     }
 
-    /* THE div — single, empty, correct id */
     #eao_integration {
       width: 100%;
       height: 850px !important;
       overflow: hidden;
       border: 1px solid var(--border);
+      border-radius: 8px;
       background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    /* ── About section ── */
+    #about {
+      background: var(--light);
+      border-top: 1px solid var(--border);
+    }
+    .about-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 72px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .about-label::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: var(--cyan);
+    }
+
+    .about-heading {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .about-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 8px;
+    }
+
+    .about-link-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      color: inherit;
+    }
+    .about-link-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 4px 16px rgba(0,200,243,0.12);
+    }
+
+    .link-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--cyan);
+    }
+    .link-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .link-info { flex: 1; }
+    .link-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .link-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .link-arrow {
+      color: var(--cyan);
+      font-size: 1.2rem;
+      flex-shrink: 0;
     }
 
     /* ── Footer ── */
     footer {
-      background: var(--dark);
-      color: #888;
-      padding: 32px 48px;
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      padding: 36px 40px;
+      border-top: 3px solid var(--cyan);
+    }
+    .footer-inner {
+      max-width: 1360px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 0.78rem;
       font-weight: 400;
-      letter-spacing: 0.04em;
-      border-top: 3px solid var(--red);
+      letter-spacing: 0.03em;
     }
 
-    footer a { color: #ccc; text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--white); }
-
     .footer-logo {
-      font-family: 'Barlow Condensed', sans-serif;
       font-size: 1rem;
       font-weight: 700;
       color: var(--white);
@@ -336,32 +442,29 @@
       letter-spacing: 0.06em;
     }
 
+    footer a { color: var(--cyan); text-decoration: none; transition: opacity 0.2s; }
+    footer a:hover { opacity: 0.75; }
+
     /* ── Animations ── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50%       { opacity: 0.3; }
     }
 
     /* ── Mobile ── */
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .topbar { display: none; }
       header { padding: 0 20px; height: 60px; }
-      .hero { padding: 48px 20px 40px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
-      .hero-stats { border-left: none; padding-left: 0; border-top: 1px solid #333; padding-top: 24px; flex-direction: row; flex-wrap: wrap; gap: 0; }
-      .stat { padding: 12px 24px 12px 0; border-bottom: none; }
-      .section-intro { padding: 32px 20px 16px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .hero { padding: 48px 20px 56px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hero-card { flex-direction: row; flex-wrap: wrap; gap: 0; padding: 20px 24px; }
+      .stat { padding: 12px 28px 12px 0; border-bottom: none; }
+      .section-header-inner { padding: 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
       .config-wrap { padding: 16px 20px 48px; }
       #eao_integration { height: 600px !important; }
-      footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 20px; }
+      .footer-inner { flex-direction: column; gap: 12px; text-align: center; padding: 0; }
+      footer { padding: 28px 20px; }
     }
   </style>
 </head>
@@ -369,7 +472,7 @@
 
   <!-- Top utility bar -->
   <div class="topbar">
-    <a href="https://www.digipara.com" target="_blank">Powered by DigiPara</a>
+    <a href="https://www.digipara.com" target="_blank" rel="noopener">Powered by DigiPara</a>
     <a href="mailto:info@jbe-elevator.com">Contact</a>
   </div>
 
@@ -377,12 +480,11 @@
   <header>
     <a href="#" class="logo">
       <div class="logo-mark">
-        <!-- Simple lift icon -->
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="2" width="18" height="20" rx="1" fill="none" stroke="white" stroke-width="2"/>
-          <line x1="12" y1="2" x2="12" y2="22" stroke="white" stroke-width="1.5"/>
-          <polyline points="7,8 9,6 11,8" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-          <polyline points="13,16 15,18 17,16" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="3" y="2" width="18" height="20" rx="1" fill="none" stroke="#002429" stroke-width="2"/>
+          <line x1="12" y1="2" x2="12" y2="22" stroke="#002429" stroke-width="1.5"/>
+          <polyline points="7,8 9,6 11,8" fill="none" stroke="#002429" stroke-width="1.5" stroke-linecap="round"/>
+          <polyline points="13,16 15,18 17,16" fill="none" stroke="#002429" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="logo-text">
@@ -393,7 +495,7 @@
     <nav class="header-nav">
       <a href="#">Products</a>
       <a href="#">Services</a>
-      <a href="#">About</a>
+      <a href="#about">About</a>
       <a href="mailto:info@jbe-elevator.com" class="btn-contact">Contact us</a>
     </nav>
   </header>
@@ -403,13 +505,13 @@
     <div class="hero-inner">
       <div class="hero-left">
         <div class="hero-tag">Interactive Demo</div>
-        <h1>Configure your<br><span>ideal elevator</span><br>solution</h1>
+        <h1>Configure your<br><em>ideal elevator</em><br>solution</h1>
         <p class="hero-desc">
           Explore and configure elevator specifications, dimensions, and finishes in real time.
           Built on DigiPara Elevatorarchitect Online — the industry standard for elevator planning.
         </p>
       </div>
-      <div class="hero-stats">
+      <div class="hero-card">
         <div class="stat">
           <div class="stat-num">360<span>°</span></div>
           <div class="stat-label">Visual Preview</div>
@@ -427,13 +529,13 @@
   </section>
 
   <!-- Configurator section header -->
-  <div class="section-intro">
-    <div class="section-label">
-      <span class="section-title">Live Configurator</span>
-    </div>
-    <div class="section-badge">
-      <span class="live-dot"></span>
-      <span>Live — Instance a25QF000008XH3tYAG</span>
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="section-title">Live Configurator</div>
+      <div class="section-badge">
+        <span class="live-dot"></span>
+        <span>Live — Instance a25QF000008XH3tYAG</span>
+      </div>
     </div>
   </div>
 
@@ -443,11 +545,58 @@
     <div id="eao_integration"></div>
   </div>
 
+  <!-- About -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-left">
+        <div class="about-label">About this demo</div>
+        <h2 class="about-heading">Powered by DigiPara Elevatorarchitect Online</h2>
+        <p class="about-text">
+          This configurator is a white-label integration of
+          <strong>DigiPara Elevatorarchitect Online (EAO)</strong>, the leading web-based platform for
+          elevator planning and specification. It lets architects, engineers, and sales teams configure
+          lift solutions and export BIM-ready documents directly from the browser — no installation required.
+        </p>
+      </div>
+      <div class="about-links">
+        <a class="about-link-card" href="https://www.digipara.com/" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">DigiPara Website</div>
+            <div class="link-desc">Learn about the full DigiPara product suite and elevator software solutions.</div>
+          </div>
+          <div class="link-arrow">→</div>
+        </a>
+        <a class="about-link-card" href="https://www.digipara.com/Portals/0/MC/WEB-EN/Default.htm#DP/EAO/White-Label%20(EAO-WL)/00_WelcomeEAOWL.htm?TocPath=DigiPara%2520Elevatorarchitect%2520Online%257CWhite-Label%2520(EAO-WL)%257C_____0" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">EAO White-Label Help Center</div>
+            <div class="link-desc">Full documentation for integrating and customising the EAO White-Label configurator.</div>
+          </div>
+          <div class="link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
-    <span class="footer-logo">JBE Elevator</span>
-    <span>© 2026 JBE Elevator Ltd. All rights reserved.</span>
-    <span>Powered by <a href="https://www.digipara.com" target="_blank">DigiPara Elevatorarchitect Online</a></span>
+    <div class="footer-inner">
+      <span class="footer-logo">JBE Elevator</span>
+      <span>© 2026 JBE Elevator Ltd. All rights reserved.</span>
+      <span>Powered by <a href="https://www.digipara.com" target="_blank" rel="noopener">DigiPara Elevatorarchitect Online</a></span>
+    </div>
   </footer>
 
   <!-- EAO White Label Integration -->
